@@ -1,0 +1,104 @@
+{% extends 'main/base.html' %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}VideoBro | Youtube Playlist{% endblock %}</title>
+</head>
+
+{% block content %}
+<body>
+
+        <div class= "download">
+            <p class="msg" id="msg">{{ msg }}</p>
+            <h2>Check Playlist</h2>
+            <form action="" method="GET" class="form">
+                {% csrf_token %}
+                <input clas="confirm" type="text" id="linkPlay" name="linkPlay" placeholder="Enter Youtube Playlist URL"><br><br>
+                
+                <button type="submit"  class="btnas" onclick="setTimeout(myFunction2, 1000)" id="audbutton"><i class="fa-solid fa-circle-check"></i> Check Playlist</button>
+            </form>
+            <br>
+            {% if data %}
+                <div class="contents m-auto">
+                    <div>
+                        <a href="{{ data.link }}" target="_blank"><img src="{{ data.pic }}" alt="thumbnail" class="logo"></a>
+                        <hr>
+                        <h5 class="title">{{ data.owner }} - {{ data.title }}</h5>
+                    </div>
+                    {% if video %}
+                        {% for v in video %}
+                        <div class="playbox">
+                            <a class='a-tag' target="_blank" href="{{ v.link }}">
+                            <div class="playfiles">
+                                    <img src="{{ v.x }}" alt="individual thumbnail" class="playimg">
+                                    <h6>{{ v.author }} - {{ v.title }}</h6>
+                                    <span class="playviews"><i class="fa-solid fa-eye"></i> {{ v.views }}</span>
+                                    
+                                </div>
+                            </a>
+                        </div>
+                        {% endfor %}
+                    <br>
+                </div>
+                
+                
+                
+                
+                {% endif %}
+            {% endif %}
+                <br>
+                <hr>
+                
+                <div class="info m-auto" id="note">
+                    <span class="red">Note:</span>
+                    <br>
+                    <span>The playlist will be downloaded in a zipped file</span>
+                    
+                </div>
+            <h2>Download Playlist</h2>
+            <form action="" method="POST" class="form">
+                {% csrf_token %}
+                <input clas="confirm" type="text" id="linkPlay" name="linkPlay" placeholder="Confirm Youtube Playlist URL"><br><br>
+                
+                <button type="submit"  class="btnas" id="audbutton" onclick="setTimeout(myFunction, 1000)"><i class="fa-solid fa-download"></i> Download Playlist</button>
+            </form>
+            <span><a href="{% url 'help' %}"><i class="fas fa-info-circle"></i>Help</a></span>
+            <br>
+            <a href="{% url 'home' %}"> &larr; Go Back Home</a>
+        </div> 
+        <footer  id="foot" class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
+            <p class="col-md-4 mb-0 text-muted">© 2023 Erad Creates</p>
+        
+            <a href="/" class="col-md-4 d-flex align-items-center justify-content-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
+              <img src="{% static 'img/V.png' %}"  style="width: 30px; height: 30px;" alt="logo">
+            </a>
+        
+            <ul class="nav col-md-4 justify-content-end">
+              <li class="nav-item"><a href="https://github.com/Eradboi" class="nav-link px-2 text-muted">Github</a></li>
+              <li class="nav-item"><a href="https://twitter.com/eradboi" class="nav-link px-2 text-muted">Twitter</a></li>
+              <li class="nav-item"><a href="https://www.youtube.com/channel/UC3KB-TqNQUkXKSLj9XbEZwg" class="nav-link px-2 text-muted">Youtube</a></li>
+              <li class="nav-item"><a href="mailto:radearcher@gmail.com" class="nav-link px-2 text-muted">Email Me</a></li>
+            </ul>
+          </footer>
+
+<script>
+    function myFunction() {
+      alert("Your Download Started")
+      document.getElementById("msg").style.display='none';
+      document.getElementById("note").style.display='block';
+      }
+    function myFunction2() {
+        document.getElementById("msg").style.display='none';   
+    }
+  </script>
+
+
+
+    
+</body>
+</html>
+{% endblock %}

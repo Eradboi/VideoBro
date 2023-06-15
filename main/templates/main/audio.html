@@ -1,0 +1,50 @@
+{% extends 'main/base.html' %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Video Bro | Download As Audio{% endblock %}</title>
+</head>
+<body>
+{% block content %}
+        <div class= "download">
+            <p class="msg" id="msg">{{ msg }}</p>
+            <h2>Download Audio</h2>
+            <div class="aud m-auto mb-5">
+
+            </div>
+            <form action="" method="POST" class="form" id="form-bodys">
+                {% csrf_token %}
+                <input clas="confirm" type="text" id="links" name="links" placeholder="Repaste Youtube URL"><br><br>
+                
+                <button type="submit" class="btnas" onclick="setTimeout(myFunction, 1000)"><i class="fa-solid fa-download"></i> Download Audio</button>
+            </form>
+            <br>
+            <a href="{% url 'home' %}" class="push-bottom"> &larr; Go Back Home</a>
+        </div>
+        <footer  id="foot" class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
+            <p class="col-md-4 mb-0 text-muted">© 2023 Erad Creates</p>
+        
+            <a href="/" class="col-md-4 d-flex align-items-center justify-content-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
+              <img src="{% static 'img/V.png' %}"  style="width: 30px; height: 30px;" alt="logo">
+            </a>
+        
+            <ul class="nav col-md-4 justify-content-end">
+              <li class="nav-item"><a href="https://github.com/Eradboi" class="nav-link px-2 text-muted">Github</a></li>
+              <li class="nav-item"><a href="https://twitter.com/eradboi" class="nav-link px-2 text-muted">Twitter</a></li>
+              <li class="nav-item"><a href="https://www.youtube.com/channel/UC3KB-TqNQUkXKSLj9XbEZwg" class="nav-link px-2 text-muted">Youtube</a></li>
+              <li class="nav-item"><a href="mailto:radearcher@gmail.com" class="nav-link px-2 text-muted">Email Me</a></li>
+            </ul>
+          </footer> 
+</body>
+<script>
+    function myFunction() {
+      alert("Your Download Started")
+      document.getElementById("msg").style.display='none';
+      }
+  </script>
+</html>
+{% endblock %}

@@ -1,0 +1,85 @@
+{% extends 'main/base.html' %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}VideoBro | Help{% endblock %}</title>
+</head>
+{% block content %}
+<body>
+    <div class="helpBody">
+        <h1 class="helpHead">VideoBro Help Documentation</h1>
+        <hr>
+        <div class="helpPlaylist">
+            <div class="innerHelp">
+                <h2><em><i class="fa-solid fa-circle-dot" style="color: rgb(26, 209, 255);"></i></em> Youtube Video Download</h2>
+                <h6><em>1.</em> Paste the <em>Youtube video</em> or <em>shorts</em> url in the search bar <em>above</em>, on the top of the webpage</h6>
+                <h6><em>2.</em> Wait for the webpage to reload and show your desired <em>video</em></h6>
+                <h6><em>3.</em> Choose to download as either <em>video</em> or <em>audio</em></h6>
+                <h6><em>4.</em> Repaste the <em>url</em>  on the following page and click <em>download</em></h6>
+                <h6><em>5.</em> Wait for the video or audio to download on your device</h6>
+                <h6></h6>
+            </div>
+      
+            <div class="innerHelp">
+                <h2><em><i class="fa-solid fa-circle-dot" style="color: rgb(26, 209, 255);" ></i></em> Instagram Video Download</h2>
+                <h6><em>1.</em> Paste your desired <em>Instagram Url</em> and <em>wait</em> for the download to be completed</h6>
+                <h6><em>2.</em> <em>NOTE</em> You cannot access contents from private accounts</h6>
+            </div>
+            <div class="innerHelp">
+                <h2><em><i class="fa-solid fa-circle-dot" style="color: rgb(26, 209, 255);"></i></em> Youtube Playlist Download</h2>
+                <h6><em>1.</em> When downloading Youtube playlists on <em>VideoBro</em>, Make sure the link to the playlist starts with a
+                     <em>https://www.youtube.com/watch?v=</em> and not <em>https://youtube.com/playlist?list=</em>.</h6>
+                <h6><em>2.</em> While downloading playlists on <em>VideoBro</em>, you need a strong internet connection.</h6>
+                <h6><em>3.</em> Some playlists may not download due to <em>age restrictions</em> on them, making it necessary to login before accessing them.</h6>
+                <h6><em>4.</em> If <em>one or more</em> videos on a playlist fails to download, then the whole playlist will not be downloaded on your device.</h6>
+            </div>
+     
+            <div class="innerHelp">
+                <h2><em><i class="fa-solid fa-circle-dot" style="color: rgb(26, 209, 255);"></i></em> Youtube Explore Page</h2>
+                <h6>Search for videos as you would on <em>youtube</em></h6>
+                <h6>The search gives the top <em>nine reults</em> of the search</h6>
+                <h6>The link to the videos are available using the <em>watch video</em> button</h6>
+            </div>      
+      
+            <div class="innerHelp">
+                <h2><em><i class="fa-solid fa-circle-dot" style="color: rgb(26, 209, 255);"></i></em>Tiktok Videos Download</h2> 
+                <h6><em>1.</em> Pate the <em>url</em> of the <em>tiktok video</em></h6>
+                <h6><em>2.</em> Click on the <em>link</em> that pops up <em>below</em> and wait for the video to be downloaded</h6>
+            </div>
+        
+        
+            <div class="innerHelp">
+                <h2><em><i class="fa-solid fa-circle-dot" style="color: rgb(26, 209, 255);"></i></em> Credits</h2>
+                <h6>This website was developed using <a href="https://www.djangoproject.com/">Django</a></h6>
+                <h6>Developer : <em>Adelowo Erioluwa</em></h6>
+                <h3 style="text-decoration: underline;">Third party websites and libraries</h3>
+                <h6>Tiktok : <a style="color: rgb(191, 0, 255);" href="https://ssstik.io/en">Ssstik.io</a> <a href="https://pypi.org/project/beautifulsoup4/">Beautiful Soup</a></h6>
+                <h6>Instagram: <a href="https://instaloader.github.io/">Instaloader</a></h6>
+                <h6>Youtube: <a href="https://pytube.io/en/latest/">Pytube</a> <a style="color: rgb(255, 0, 0);" href="https://developers.google.com/youtube/v3">Youtube API</a></h6>
+                <h3 style="text-decoration: underline;">Special Thanks</h3>
+                <h6><a style="color: rgb(255, 136, 0);" href="https://stackoverflow.com/">Stack Overflow</a></h6>
+                <h6><a style="color: rgb(10, 189, 121);" href="https://chat.openai.com/">Chat GPT</a></h6>
+                <h6>Adeyemi Israel</h6>
+            </div>
+        </div>
+    </div>
+    <footer  id="foot" class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
+        <p class="col-md-4 mb-0 text-muted">© 2023 Erad Creates</p>
+    
+        <a href="/" class="col-md-4 d-flex align-items-center justify-content-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
+          <img src="{% static 'img/V.png' %}"  style="width: 30px; height: 30px;" alt="logo">
+        </a>
+    
+        <ul class="nav col-md-4 justify-content-end">
+          <li class="nav-item"><a href="https://github.com/Eradboi" class="nav-link px-2 text-muted">Github</a></li>
+          <li class="nav-item"><a href="https://twitter.com/eradboi" class="nav-link px-2 text-muted">Twitter</a></li>
+          <li class="nav-item"><a href="https://www.youtube.com/channel/UC3KB-TqNQUkXKSLj9XbEZwg" class="nav-link px-2 text-muted">Youtube</a></li>
+          <li class="nav-item"><a href="mailto:radearcher@gmail.com" class="nav-link px-2 text-muted">Email Me</a></li>
+        </ul>
+      </footer>
+</body>
+</html>
+{% endblock %}

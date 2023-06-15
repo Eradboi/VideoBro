@@ -1,0 +1,80 @@
+{% extends 'main/base.html' %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Video Bro | HomePage{% endblock %}</title>
+</head>
+{% block content %}
+<body>
+    {% if data %}
+    <div class="contents m-auto">
+            <div class="thumbspace justify-content-center">
+                <img src="{{ data.thumbnail }}" alt="thumbnail" class="thumbnail">
+
+            </div>
+            <p class="bottom-left">{{ data.length }}</p>
+            <hr>
+            <div>
+                <h5 class="title">{{ data.author }} - {{ data.title }}</h5>
+                <h6 class="views"><i class="fa-solid fa-eye"></i> {{ data.views }}    <i class="fa-solid fa-minus"></i> <i class="fa-regular fa-calendar"></i>    {{ data.date }}</h6>
+                
+            </div>
+            <br>
+            <ul class="nav justify-content-center">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="audio">Download as Audio</a>
+                </li>
+                <li></li>
+                <li class="nav-item">
+                    <a class="nav-link" href="video">Download as Video</a>
+                </li>
+            </ul>
+    </div>
+
+    {% else %}
+        <div class="h1-tag">
+            <p class="msg">{{ msg }}</p>
+        </div>
+        <div class="main-body">
+            <h1 class="main-header">
+                Download Videos Offline
+            </h1>
+            <h5 class="main-bottom">Paste  Youtube Video Url Above and Get Video Within Seconds</h5>
+            <div class="yout">
+
+            </div>
+            <span class="helplogo"><a href="{% url 'help' %}"><i class="fas fa-info-circle"></i>Help</a></span>
+        </div>
+
+
+
+
+
+
+
+
+
+
+    {% endif %}
+    <footer  id="foot" class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
+        <p class="col-md-4 mb-0 text-muted">© 2023 Erad Creates</p>
+    
+        <a href="/" class="col-md-4 d-flex align-items-center justify-content-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
+          <img src="{% static 'img/V.png' %}"  style="width: 30px; height: 30px;" alt="logo">
+        </a>
+    
+        <ul class="nav col-md-4 justify-content-end">
+          <li class="nav-item"><a href="https://github.com/Eradboi" class="nav-link px-2 text-muted">Github</a></li>
+          <li class="nav-item"><a href="https://twitter.com/eradboi" class="nav-link px-2 text-muted">Twitter</a></li>
+          <li class="nav-item"><a href="https://www.youtube.com/channel/UC3KB-TqNQUkXKSLj9XbEZwg" class="nav-link px-2 text-muted">Youtube</a></li>
+          <li class="nav-item"><a href="mailto:radearcher@gmail.com" class="nav-link px-2 text-muted">Email Me</a></li>
+        </ul>
+      </footer>
+     
+</body>
+</html>
+{% endblock %}

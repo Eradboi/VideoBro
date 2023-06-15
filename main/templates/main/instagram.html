@@ -1,0 +1,52 @@
+{% extends 'main/base.html' %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}VideoBro | Instagram{% endblock %}</title>
+</head>
+{% block content %}
+<body>  
+        <h2 class="exploreh2">Download Instagram Videos</h2>
+        <hr>
+        <div class="exdiv">
+            <p class="msg">{{ msg }}</p>
+            <form class="form-groups" role="search" method="POST">
+                {% csrf_token %}
+                <input class="youtput" name="answer" type="search" id="search"  placeholder="Paste Instagram Video link" />
+                <br><br>
+                <button class="search-button1" type="submit" onclick="setTimeout(myFunction2, 1000)">
+                    <i class="fa-solid fa-download"></i> Download</i>
+                </button>
+            </form>
+            <br>
+            <span><a href="{% url 'help' %}"><i class="fas fa-info-circle"></i>Help</a></span>
+            <h1 class="msg-big">Download Videos Off Instagram</h1>
+        </div>
+
+        <footer  id="foot" class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
+            <p class="col-md-4 mb-0 text-muted">© 2023 Erad Creates</p>
+        
+            <a href="/" class="col-md-4 d-flex align-items-center justify-content-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
+              <img src="{% static 'img/V.png' %}"  style="width: 30px; height: 30px;" alt="logo">
+            </a>
+        
+            <ul class="nav col-md-4 justify-content-end">
+              <li class="nav-item"><a href="https://github.com/Eradboi" class="nav-link px-2 text-muted">Github</a></li>
+              <li class="nav-item"><a href="https://twitter.com/eradboi" class="nav-link px-2 text-muted">Twitter</a></li>
+              <li class="nav-item"><a href="https://www.youtube.com/channel/UC3KB-TqNQUkXKSLj9XbEZwg" class="nav-link px-2 text-muted">Youtube</a></li>
+              <li class="nav-item"><a href="mailto:radearcher@gmail.com" class="nav-link px-2 text-muted">Email Me</a></li>
+            </ul>
+          </footer>
+        
+    <script>
+          function myFunction2() {
+            alert("Your Download Started")
+            document.getElementById("msg").style.display='none';
+          }
+    </script>   
+</body>
+</html>
+{% endblock %}

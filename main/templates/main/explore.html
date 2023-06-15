@@ -1,0 +1,97 @@
+{% extends 'main/base.html' %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}VideoBro | Explore{% endblock %}</title>
+    <style>
+        #foot{
+            display: none;
+        }
+        footer{
+            display: none;
+        }
+    </style>
+</head>
+{% block content %}
+<body id="explorebody">
+    <div class="exdiv">
+        <h2 class="exploreh2">Search Youtube</h2>
+        <hr>
+   
+        <form class="form-groups" onclick="setTimeout(myFunction, 1000)" role="search" method="POST">
+            {% csrf_token %}
+            <input class="youtput" name="real" type="search" id="search"  placeholder="Search for videos on Youtube" />
+            <button class="search-button2" type="submit">
+                <i class="fa-solid fa-magnifying-glass"></i>
+            </button>
+        </form>
+        <br>
+        <span><a href="{% url 'help' %}"><i class="fas fa-info-circle"></i>Help</a></span>
+
+    </div>
+    {% if videos %}
+        {% for vids in videos %}
+                <div class="card" id="a">
+                    <img class="card-img-top" src="{{ vids.thumbnail }}" alt="Thumbnail">
+                    {% if vids.duration == 0 %}
+                        <p class="bottom-lefts" >No Duration</p>
+                    {% else %}
+                        <p class="bottom-lefts" >{{ vids.duration }}</p>
+                    {% endif %}
+                    <div class="card-body">
+                        <span class="card-owner">{{ vids.owner }}</span>
+                        <h6 class="card-title">{{ vids.title }}</h6>
+                        <a href="{{ vids.url }}" target="_blank" class="btn btn-info"><i class="fa-brands fa-youtube"></i> Watch Video</a>
+                    </div>
+                </div>
+            {% endfor %}
+        <br>
+    {% elif msg %}
+            <p class="msg">{{ msg }}</p>
+    {% else %}
+            <h1 class="msg-big">Explore Videos On Youtube</h1>
+            <footer  id="foot" class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
+                <p class="col-md-4 mb-0 text-muted">© 2023 Erad Creates</p>
+            
+                <a href="/" class="col-md-4 d-flex align-items-center justify-content-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
+                  <img src="{% static 'img/V.png' %}"  style="width: 30px; height: 30px;" alt="logo">
+                </a>
+            
+                <ul class="nav col-md-4 justify-content-end">
+                  <li class="nav-item"><a href="https://github.com/Eradboi" class="nav-link px-2 text-muted">Github</a></li>
+                  <li class="nav-item"><a href="https://twitter.com/eradboi" class="nav-link px-2 text-muted">Twitter</a></li>
+                  <li class="nav-item"><a href="https://www.youtube.com/channel/UC3KB-TqNQUkXKSLj9XbEZwg" class="nav-link px-2 text-muted">Youtube</a></li>
+                  <li class="nav-item"><a href="mailto:radearcher@gmail.com" class="nav-link px-2 text-muted">Email Me</a></li>
+                </ul>
+              </footer>
+    {% endif %}
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+    <script>
+        function myFunction() {
+          document.getElementById("msg").style.display='none';
+          document.getElementById("foot").style.display='none';
+          }
+    </script>
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+    <script>
+      $( function() {
+        $( "#search" ).autocomplete({
+          source: ["wwe","ashish chanchlani","punjabi songs","dynamo gaming","carryminati","pewdiepie","bb ki vines","t series","pubg","tom and jerry","emiway bantai","study iq","5 minute crafts","Akure","amit bhadana","stand up comedy","mumbiker nikhil","bts","tik tok","free fire","baby shark","asmr","music","markiplier","old town road","billie eilish","pewdiepie vs t series","fortnite","david dobrik","jacksepticeye","joe rogan","james charles","dantdm","snl","game grumps","lofi","minecraft","shane dawson","fox news","msnbc","mrbeast","fgteev","ssundee","lofi hip hop","gacha life","stephen colbert","flamingo","ariana grande","nightcore","songs","jake paul","lazarbeam","tyt","eminem","taylor swift","post malone","vanossgaming","memes","jeffree star","trump","study music","cardi b","juice wrld","game of thrones","espn","unspeakable","john oliver","logan paul",
+            "nba youngboy","try not to laugh","blackpink","coryxkenshin","avengers endgame","roblox","andrew yang","dude perfect","last week tonight","peppa pig","mr beast","chad wild clay","dunkey","ufc","game theory","nfl","jre","buzzfeed unsolved","popularmmos","drake","borderlands 3","ninja","colbert","Cape Coast","sml","itsfunneh","undisputed","ben shapiro","seth meyers","rachel maddow","pokemon sword and shield","Tjeffy","trevor noah","critical role","trisha paytas","blippi","gmm","first take","nintendo","Futa","queen","sssniperwolf","ryans toy review","tati","funny videos","sis vs bro","jenna marbles","justin bieber","ariana grande","katy perry","rihanna","bruno mars","Quebec","Toronto","Ottawa","Edmonton","Victoria","Vancouver","Calgary","Montreal",
+            "wiz khalifa","nicki minaj","beyonce","chris brown","KSI","popularmmos","stampylonghead","rooster teeth","anesongib","thejwittz",
+            "putther","ser winter","Giancarlo parimango","Sidemen","SidemenReacts","SidePlus","Miniminter","Zerkaa","TBJZL","Harry Lewis","W2S","Behzinga","Vikkstar123","Beta Squad",
+            "Niko Omilana","Chunkz","Aj Shabeel","Sharky","KingKennyTv","MrBeast6000","MrBeast Gaming","Beast Reacts","Beast Philanthropy","Chris Tyson","Israel Adeyemi","Chandler Hallow",
+            "Karl Jacobs","Nolan Hansen","2face Idibia","A-Q","Burna Boy","Davido","WizKid","Rema","Fireboy","Joeboy","Mavin","Arya Starr","Tems","Drake","Seyi Vybes","Victor Oshimen","Boy Spyce",]
+
+        });
+      } );
+    </script>
+
+</body>
+</html>
+{% endblock %}
