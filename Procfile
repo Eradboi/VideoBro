@@ -1,0 +1,1 @@
+web: gunicorn VideoBro.wsgi --log-file
