@@ -1,0 +1,35 @@
+.h1-tag{
+    color: black;
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.thumbnail{
+    width:350px;
+    height: 200px;
+    border-radius: 15px;
+    margin-left: 100px;
+    margin-right:100px;
+}
+
+.title{
+    text-align: center;
+}
+
+.textbox{
+    width: 300px;
+    border-radius: 6px;
+    padding-top: .5rem;
+    padding-bottom: .5rem;
+}
+
+
+
+
+.navbar{
+    background-color: black;
+    vertical-align: middle;
+}
+.confirm{
+    border-radius: 6px;
+}
