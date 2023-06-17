@@ -237,23 +237,37 @@ def help(sos):
     return render(sos, 'main/Help.html')
 def instagram(request):
     try:
-        for fname in os.listdir():
-            if fname.endswith('-IG.mp4'):
-                os.remove(fname)
+        directory="IG/"
+        if os.path.exists(directory):
+            for root, dirs, files in os.walk(directory, topdown=False):
+                for file in files:
+                    file_path = os.path.join(root, file)
+                    os.remove(file_path)
+                for dir in dirs:
+                    dir_path = os.path.join(root, dir)
+                    os.rmdir(dir_path)
         if request.method == "POST":
             import instaloader
+    
             loader = instaloader.Instaloader()
-            url = request.POST['answer']
-            something = url.split("/")[-2]
-            loader.download_videos = True
-            loader.download_pictures = False
-            post = instaloader.Post.from_shortcode(loader.context, something)
-            loader.download_post(post,download_only=True) 
-            out_file = loader.target_directory
-            base, ext= os.path.splitext(out_file)
-            new_file = base + "-VideoBro-IG" + '.mp4'
-            os.rename(out_file, new_file)
-            return FileResponse(open(new_file,'rb'), as_attachment=True)
+            if "answer" in request.POST:
+
+                url = request.POST['answer']
+                something = url.split("/")[-2]
+                loader.download_videos = True
+                loader.download_pictures = False
+
+                post = instaloader.Post.from_shortcode(loader.context, something)
+                if post.is_video:
+                    loader.download_post(post, target='IG')
+                    for root, dirs, files in os.walk(directory, topdown=False):
+                        for file in files:
+                            file_path = os.path.join(root, file)
+                            if file.endswith('.mp4'):
+                                return FileResponse(open(file_path,'rb'), as_attachment=True)
+            else:
+                e=instaloader.exceptions.InstaloaderException
+                return render(request, 'main/instagram.html', {'msg':f"{e}"})
     except:
         return render(request, 'main/instagram.html', {'msg':"Error in downloading Instagram Video"})
     return render(request, 'main/instagram.html')
