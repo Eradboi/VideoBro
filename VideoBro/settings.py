@@ -23,9 +23,9 @@ DATABASE_URL = "postgresql://postgres:FF6hFYdOfbrLyZD3ULOA@containers-us-west-11
 SECRET_KEY = 'django-insecure-+_g+3nv0jg+nj7=@ruq$qz5%eu(f5o(c#+-h3@r&h56f*g*l$a'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['videobro-production.up.railway.app']
 
 
 # Application definition
@@ -117,9 +117,8 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
 import os
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static')
 ]
@@ -132,6 +131,7 @@ CRISPY_TEMPLATE_PACK = "bootstrap4"
 CORS_ALLOWED_ORIGINS = [
     'https://videobro-production.up.railway.app',  # Add your URL here
 ]
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 
 
