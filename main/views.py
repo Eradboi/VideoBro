@@ -253,11 +253,7 @@ def instagram(request):
             base, ext= os.path.splitext(out_file)
             new_file = base + "-VideoBro-IG" + '.mp4'
             os.rename(out_file, new_file)
-            if 'IG' in new_file:
-                return FileResponse(open(new_file,'rb'), as_attachment=True)
-            else:
-                e=instaloader.exceptions.InstaloaderException
-                return render(request, 'main/instagram.html', {'msg':f"{e}"})
+            return FileResponse(open(new_file,'rb'), as_attachment=True)
     except:
         return render(request, 'main/instagram.html', {'msg':"Error in downloading Instagram Video"})
     return render(request, 'main/instagram.html')
