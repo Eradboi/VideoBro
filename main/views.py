@@ -242,25 +242,19 @@ def instagram(request):
                 os.remove(fname)
         if request.method == "POST":
             import instaloader
-    
             loader = instaloader.Instaloader()
-            if "answer" in request.POST:
+            url = request.POST['answer']
+            something = url.split("/")[-2]
+            loader.download_videos = True
+            loader.download_pictures = False
 
-                url = request.POST['answer']
-                something = url.split("/")[-2]
-                loader.download_videos = True
-                loader.download_pictures = False
-
-                post = instaloader.Post.from_shortcode(loader.context, something)
-                if post.is_video:
-                    
-                    out_file = loader.download_post(post, target='') 
-                    base, ext= os.path.splitext(out_file)
-                    new_file = base + "-VideoBro-IG" + '.mp4'
-                    os.rename(out_file, new_file)
-                    for file in os.listdir():
-                        if file.endswith('-IG.mp4'):
-                            return FileResponse(open(new_file,'rb'), as_attachment=True)
+            post = instaloader.Post.from_shortcode(loader.context, something)
+            out_file = loader.download_post(post, target=os.getcwd()) 
+            base, ext= os.path.splitext(out_file)
+            new_file = base + "-VideoBro-IG" + '.mp4'
+            os.rename(out_file, new_file)
+            if '-IG.mp4' in new_file:
+                return FileResponse(open(new_file,'rb'), as_attachment=True)
             else:
                 e=instaloader.exceptions.InstaloaderException
                 return render(request, 'main/instagram.html', {'msg':f"{e}"})
