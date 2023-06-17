@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'main',
     'crispy_forms',
     'crispy_bootstrap4',
+    'whitenoise.runserver_nostatic',
 ]
 
 MIDDLEWARE = [
@@ -50,6 +51,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    "whitenoise.middleware.WhiteNoiseMiddleware",
 ]
 
 ROOT_URLCONF = 'VideoBro.urls'
@@ -128,6 +130,7 @@ CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap4"
 CRISPY_TEMPLATE_PACK = "bootstrap4"
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 CSRF_TRUSTED_ORIGINS = ['https://*videobro-production.up.railway.app']
+STATICFILES_STORAGE="whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 
 
