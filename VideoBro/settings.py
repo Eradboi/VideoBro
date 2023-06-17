@@ -77,15 +77,7 @@ WSGI_APPLICATION = 'VideoBro.wsgi.application'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        #'ENGINE': 'django.db.backends.sqlite3',
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'railway',
-        'USER': 'postgres',
-        'PASSWORD': 'FF6hFYdOfbrLyZD3ULOA',
-        'HOST': 'containers-us-west-115.railway.app',
-        'PORT': '6589',
-    }
+    'default': dj_database_url.config(default=DATABASE_URL, conn_max_age=1000),
 }
 
 
