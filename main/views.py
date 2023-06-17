@@ -230,7 +230,7 @@ def instagram(request):
             if fname.endswith('.mp4'):
                 os.remove(fname)
         if request.method == "POST":
-            directory = 'IG/'
+            directory = 'ig/'
             os.makedirs(directory, exist_ok=True)
             import instaloader
             loader = instaloader.Instaloader()
@@ -242,9 +242,12 @@ def instagram(request):
 
             # Set the video file path
             timestamp = post.date_utc.strftime("%Y-%m-%d_%H-%M-%S")
-            video_file_path = os.path.join(os.getcwd(), directory)
-            video_file_path = os.path.join(video_file_path,f"{timestamp}_UTC.mp4")
-            return FileResponse(open(video_file_path,'rb'), as_attachment=True)
+            video_file_paths = os.path.join(os.getcwd(), directory)
+            file =f"{timestamp}_UTC.mp4"
+            video_file_path = os.path.join(video_file_paths,file)
+            response = FileResponse(open(video_file_path,'rb'),content_type='video/mp4')
+            response['Content-Disposition'] = f'attachment; filename="{file}"'
+            return response
     except:
         return render(request, 'main/instagram.html', {'msg':"Error in downloading Instagram Video"})
     return render(request, 'main/instagram.html')
