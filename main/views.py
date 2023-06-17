@@ -99,17 +99,6 @@ def playlist(request):
     data = None
     # Remove the directory and all its contents
     try:
-        directory="playlist/"
-        if os.path.exists(directory):
-            for root, dirs, files in os.walk(directory, topdown=False):
-                for file in files:
-                    file_path = os.path.join(root, file)
-                    os.remove(file_path)
-                for dir in dirs:
-                    dir_path = os.path.join(root, dir)
-                    os.rmdir(dir_path)
-        if "url" in request.GET:
-            redirect("/")
         if request.method == "POST": 
             link = request.POST['linkPlay']
             playlist = Playlist(link)   
@@ -241,7 +230,7 @@ def instagram(request):
             if fname.endswith('.mp4'):
                 os.remove(fname)
         if request.method == "POST":
-            
+
             import instaloader
             loader = instaloader.Instaloader()
             url = request.POST['answer']
