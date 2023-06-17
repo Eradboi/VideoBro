@@ -43,18 +43,13 @@
           </footer> 
 </body>
 <script>
-    $(document).ready(function () { 
-      $(document).ajaxStart(function () {
-              $('#wait').show();
-          });
-          $(document).ajaxStop(function () {
-              $('#wait').hide();
-          });
-          $(document).ajaxError(function () {
-              $('#wait').hide();
-          });   
-      });
-    function myFunction() {
+  function myFunction() {
+      setTimeout(function() {
+        wait.style.display = 'flex';
+      }, 10);
+      setTimeout(function() {
+        wait.style.display = 'none';
+      }, 5000);
       document.getElementById("msg").style.display='none';
       }
   </script>
