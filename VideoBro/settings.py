@@ -119,8 +119,8 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 import os
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static/')
+STATIC_ROOT = [
+    os.path.join(BASE_DIR, 'static')
 ]
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
@@ -128,7 +128,6 @@ STATICFILES_DIRS = [
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap4"
 CRISPY_TEMPLATE_PACK = "bootstrap4"
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 CSRF_TRUSTED_ORIGINS = ['https://*videobro-production.up.railway.app']
 STATICFILES_STORAGE="whitenoise.storage.CompressedManifestStaticFilesStorage"
 
