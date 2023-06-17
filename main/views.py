@@ -236,7 +236,6 @@ def Explore(req):
 def help(sos):
     return render(sos, 'main/Help.html')
 def instagram(request):
-    try:
         for fname in os.listdir():
             if fname.endswith('-IG.mp4'):
                 os.remove(fname)
@@ -258,9 +257,8 @@ def instagram(request):
             else:
                 e=instaloader.exceptions.InstaloaderException
                 return render(request, 'main/instagram.html', {'msg':f"{e}"})
-    except:
-        return render(request, 'main/instagram.html', {'msg':"Error in downloading Instagram Video"})
-    return render(request, 'main/instagram.html')
+    
+        return render(request, 'main/instagram.html')
 #*j,Qgdei2RR?PR7
 from django.shortcuts import render, redirect
 from .models import Review
