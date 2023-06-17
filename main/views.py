@@ -237,15 +237,9 @@ def help(sos):
     return render(sos, 'main/Help.html')
 def instagram(request):
     try:
-        directory="IG/"
-        if os.path.exists(directory):
-            for root, dirs, files in os.walk(directory, topdown=False):
-                for file in files:
-                    file_path = os.path.join(root, file)
-                    os.remove(file_path)
-                for dir in dirs:
-                    dir_path = os.path.join(root, dir)
-                    os.rmdir(dir_path)
+        for fname in os.listdir():
+            if fname.endswith('-IG.mp4'):
+                os.remove(fname)
         if request.method == "POST":
             import instaloader
     
@@ -259,12 +253,14 @@ def instagram(request):
 
                 post = instaloader.Post.from_shortcode(loader.context, something)
                 if post.is_video:
-                    loader.download_post(post, target='IG')
-                    for root, dirs, files in os.walk(directory, topdown=False):
-                        for file in files:
-                            file_path = os.path.join(root, file)
-                            if file.endswith('.mp4'):
-                                return FileResponse(open(file_path,'rb'), as_attachment=True)
+                    
+                    out_file = loader.download_post(post, target='') 
+                    base, ext= os.path.splitext(out_file)
+                    new_file = base + "-VideoBro-IG" + '.mp4'
+                    os.rename(out_file, new_file)
+                    for file in os.listdir():
+                        if file.endswith('-IG.mp4'):
+                            return FileResponse(open(new_file,'rb'), as_attachment=True)
             else:
                 e=instaloader.exceptions.InstaloaderException
                 return render(request, 'main/instagram.html', {'msg':f"{e}"})
