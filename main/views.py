@@ -247,10 +247,15 @@ def instagram(request):
             something = url.split("/")[-2]
             loader.download_videos = True
             loader.download_pictures = False
-
+            target_directory = ""
+            loader.target_directory = target_directory
             post = instaloader.Post.from_shortcode(loader.context, something)
-            out_file = loader.download_post(post, '{target}') 
-            return FileResponse(open(out_file,'rb'), as_attachment=True)
+            loader.download_post(post) 
+            out_file = loader.target_directory
+            base, ext= os.path.splitext(out_file)
+            new_file = base + "-VideoBro-IG" + '.mp4'
+            os.rename(out_file, new_file)
+            return FileResponse(open(new_file,'rb'), as_attachment=True)
     except:
         return render(request, 'main/instagram.html', {'msg':"Error in downloading Instagram Video"})
     return render(request, 'main/instagram.html')
