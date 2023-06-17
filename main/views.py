@@ -234,9 +234,9 @@ def instagram(request):
             os.makedirs(directory, exist_ok=True)
             import instaloader
             loader = instaloader.Instaloader()
-            url = request.POST['answer']
+            url = request.POST['answers']
             something = url.split("/")[-2]
-            loader.download_post(something, target=directory) 
+            loader.download_post(url, target=directory) 
             zip_file_path = os.path.join(directory, f"{something}.mp4")
             return FileResponse(open(zip_file_path,'rb'), as_attachment=True)
     except:
