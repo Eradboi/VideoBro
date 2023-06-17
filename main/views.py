@@ -247,10 +247,8 @@ def instagram(request):
             something = url.split("/")[-2]
             loader.download_videos = True
             loader.download_pictures = False
-            target_directory = ""
-            loader.target_directory = target_directory
             post = instaloader.Post.from_shortcode(loader.context, something)
-            loader.download_post(post) 
+            loader.download_post(post,download_only=True) 
             out_file = loader.target_directory
             base, ext= os.path.splitext(out_file)
             new_file = base + "-VideoBro-IG" + '.mp4'
