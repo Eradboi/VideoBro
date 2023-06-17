@@ -230,7 +230,7 @@ def instagram(request):
             if fname.endswith('.mp4'):
                 os.remove(fname)
         if request.method == "POST":
-            directory = 'IG'
+            directory = 'IG/'
             os.makedirs(directory, exist_ok=True)
             import instaloader
             loader = instaloader.Instaloader()
