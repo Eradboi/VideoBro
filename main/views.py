@@ -235,10 +235,15 @@ def instagram(request):
             import instaloader
             loader = instaloader.Instaloader()
             url = request.POST['answers']
-            something = url.split("/")[-2]
-            loader.download_post(url, target=directory) 
-            zip_file_path = os.path.join(directory, f"{something}.mp4")
-            return FileResponse(open(zip_file_path,'rb'), as_attachment=True)
+
+            post_id = url.split("/")[-2]
+            post = instaloader.Post.from_shortcode(loader.context, post_id)
+            loader.download_post(post, target=directory)
+
+            # Set the video file path
+            timestamp = post.date_utc.strftime("%Y-%m-%d_%H-%M-%S")
+            video_file_path = os.path.join(directory, f"{timestamp}.mp4")
+            return FileResponse(open(video_file_path,'rb'), as_attachment=True)
     except:
         return render(request, 'main/instagram.html', {'msg':"Error in downloading Instagram Video"})
     return render(request, 'main/instagram.html')
