@@ -245,10 +245,12 @@ def instagram(request):
             video_file_paths = os.path.join(os.pardir(), directory)
             file =f'{timestamp}_UTC.mp4'
             video_file_path = os.path.join(video_file_paths,file)
-            video_file = open(video_file_path, 'rb')
-            response = FileResponse(video_file, content_type='video/mp4')
-            response['Content-Disposition'] = 'attachment; filename="VideoBro-Instagram.mp4"'
-            return response
+            if video_file_path.endswith('.mp4'):
+                video_file = open(video_file_path, 'rb')
+
+                response = FileResponse(video_file, content_type='video/mp4')
+                response['Content-Disposition'] = 'attachment; filename="VideoBro-Instagram.mp4"'
+                return response
     except:
         return render(request, 'main/instagram.html', {'msg':"Error in downloading Instagram Video"})
     return render(request, 'main/instagram.html')
