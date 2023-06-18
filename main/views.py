@@ -232,8 +232,8 @@ def instagram(request):
         import zipfile
         #downloaded_files =[]
         if request.method == "POST":
-            directory = 'IG'
-            os.makedirs(directory, exist_ok=True)
+            directorys = 'IG/'
+            os.makedirs(directorys, exist_ok=True)
             import instaloader
             loader = instaloader.Instaloader()
             url = request.POST['answers']
@@ -241,17 +241,19 @@ def instagram(request):
             post_id = url.split("/")[-2]
             post = instaloader.Post.from_shortcode(loader.context, post_id)
         
-            loader.download_post(post, target=directory)
-            """downloads = []
-            all = os.listdir('IG')
-            for x in all:
-                downloads.append(x)"""
-
-            # Set the video file path
-            for files in os.listdir('IG'):
-                if files.endswith('.mp4'):
-                    all = os.path.join(os.path.dirname(os.path.abspath(__file__)),f'IG\{files}')
-                    return FileResponse(open(all,'rb'), as_attachment=True)
+            loader.download_post(post, target=directorys)
+            downloads = []
+            timestamp = post.date_utc.strftime("%Y-%m-%d_%H-%M-%S")
+            name = f'{timestamp}_UTC.mp4'
+            all = os.path.join(directorys,f'{name}')
+            downloads.append(all)
+            zip_file_path = os.path.join(directorys, 'VideoBro-IG-Download.zip')  # Set the path for the ZIP file
+            with zipfile.ZipFile(zip_file_path, 'w') as zip_file:
+                for file_path in downloads:
+                    zip_file.write(file_path)
+            response = FileResponse(open(zip_file_path, 'rb'), content_type='application/zip')
+            response['Content-Disposition'] = 'attachment; filename="VideoBro-IG-Download.zip"'
+            return response         
     except:
         return render(request, 'main/instagram.html', {'msg':"Error in downloading Instagram Video"})
     return render(request, 'main/instagram.html')
