@@ -228,7 +228,7 @@ def instagram(request):
     try:
         if request.method == "POST":
             import zipfile
-            directorys = 'IG/'
+            directorys = 'IG'
             os.makedirs(directorys, exist_ok=True)
             import instaloader
             loader = instaloader.Instaloader()
@@ -241,9 +241,9 @@ def instagram(request):
             downloads = []
             timestamp = post.date_utc.strftime("%Y-%m-%d_%H-%M-%S")
             name = f'{timestamp}_UTC.mp4'
-            all = os.path.join(f'{directorys}',f'{name}')
+            all = os.path.join(f'{directorys}/',f'{name}')
             downloads.append(all)
-            zip_file_path = os.path.join(directorys, 'VideoBro-IG-Download.zip')  # Set the path for the ZIP file
+            zip_file_path = os.path.join(directorys, 'VideoBro-Download.zip')  # Set the path for the ZIP file
             with zipfile.ZipFile(zip_file_path, 'w') as zip_file:
                 for file_path in downloads:
                     zip_file.write(file_path)
