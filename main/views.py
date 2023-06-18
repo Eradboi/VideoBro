@@ -230,7 +230,7 @@ def instagram(request):
             if fname.endswith('.mp4'):
                 os.remove(fname)
         if request.method == "POST":
-            directory = 'ig/'
+            directory = 'IG'
             os.makedirs(directory, exist_ok=True)
             import instaloader
             loader = instaloader.Instaloader()
@@ -238,19 +238,19 @@ def instagram(request):
 
             post_id = url.split("/")[-2]
             post = instaloader.Post.from_shortcode(loader.context, post_id)
-            loader.download_post(post, target=directory)
+            if post.get_is_videos():
+                loader.download_post(post, target=directory)
 
-            # Set the video file path
-            timestamp = post.date_utc.strftime("%Y-%m-%d_%H-%M-%S")
-            video_file_paths = os.path.join(os.pardir(), directory)
-            file =f'{timestamp}_UTC.mp4'
-            video_file_path = os.path.join(video_file_paths,file)
-            if video_file_path.endswith('.mp4'):
-                video_file = open(video_file_path, 'rb')
-
-                response = FileResponse(video_file, content_type='video/mp4')
-                response['Content-Disposition'] = 'attachment; filename="VideoBro-Instagram.mp4"'
-                return response
+                # Set the video file path
+                for files in os.listdir():
+                    if files=='IG':
+                        for f in os.listdir(files):
+                            if f.endswith('_UTC.mp4'):
+                                all = os.path.join(os.getcwd(),f'IG\{f}')
+                                video_file = open(all, 'rb')
+                                response = FileResponse(video_file, content_type='video/mp4')
+                                response['Content-Disposition'] = 'attachment; filename="VideoBro-Instagram.mp4"'
+                                return response
     except:
         return render(request, 'main/instagram.html', {'msg':"Error in downloading Instagram Video"})
     return render(request, 'main/instagram.html')
