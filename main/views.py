@@ -238,19 +238,16 @@ def instagram(request):
 
             post_id = url.split("/")[-2]
             post = instaloader.Post.from_shortcode(loader.context, post_id)
-            if post.get_is_videos():
-                loader.download_post(post, target=directory)
+        
+            loader.download_post(post, target=directory)
 
-                # Set the video file path
-                for files in os.listdir():
-                    if files=='IG':
-                        for f in os.listdir(files):
-                            if f.endswith('_UTC.mp4'):
-                                all = os.path.join(os.getcwd(),f'IG\{f}')
-                                video_file = open(all, 'rb')
-                                response = FileResponse(video_file, content_type='video/mp4')
-                                response['Content-Disposition'] = 'attachment; filename="VideoBro-Instagram.mp4"'
-                                return response
+            # Set the video file path
+            for files in os.listdir():
+                if files=='IG':
+                    for f in os.listdir(files):
+                        if f.endswith('_UTC.mp4'):
+                            all = os.path.join(os.getcwd(),f'IG\{f}')
+                            return FileResponse(open(all,'rb'), as_attachment=True)
     except:
         return render(request, 'main/instagram.html', {'msg':"Error in downloading Instagram Video"})
     return render(request, 'main/instagram.html')
