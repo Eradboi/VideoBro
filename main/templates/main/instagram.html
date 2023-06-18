@@ -14,8 +14,8 @@
         <div class="exdiv">
             <p class="msg">{{ msg }}</p>
             <form class="form-groups" role="search" method="POST">
-                {% csrf_token %}
-                <input class="youtput" name="answers" type="search" id="search"  placeholder="Paste Instagram Video link" />
+              {% csrf_token %}
+                <input class="youtput" name="answers" type="text" id="search"  placeholder="Paste Instagram Video link" />
                 <br><br>
                 <div class="m-auto" id="wait" style="display: none; text-align: center;">
                   <span class="tiklink m-auto"><img src="https://media2.giphy.com/media/3oEjI6SIIHBdRxXI40/giphy.gif?cid=ecf05e47dpj6co644kpae7y5ry8n7yk6wmn7nc0d2i54vqqw&ep=v1_gifs_search&rid=giphy.gif&ct=g" width="30" height="30" alt="Loading..." />Download Started</span>
