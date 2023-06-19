@@ -26,8 +26,16 @@
                 </button>
             </form>
             <br>
-            <span><a href="{% url 'help' %}"><i class="fas fa-info-circle"></i>Help</a></span>
-            <h1 class="msg-big">Download Videos Off Instagram</h1>
+            {% if data %}
+            <div class="tikLinkbody m-auto">
+                <span class="tiklink">Please click the link below to download your file:</span>
+                <br>
+                <a class="link-gangan" href="{{ data.link }}">Link<i class="fa-solid fa-link"></i></a>
+            </div>
+            {% else %}
+            <h1 class="msg-big">Download Instagram Videos</h1>
+
+            {% endif %}
         </div>
 
         <footer  id="foot" class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
