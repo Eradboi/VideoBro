@@ -227,6 +227,7 @@ def help(sos):
 def instagram(request):
     try:
         if request.method == "POST":
+            url = request.POST['answer']
             import requests
             from bs4 import BeautifulSoup
             cookies = {
@@ -260,7 +261,7 @@ def instagram(request):
             }
 
             data = {
-                'url': 'https://www.instagram.com/p/CtotVEFPN11/?utm_source=ig_web_copy_link&igshid=MzRlODBiNWFlZA==',
+                'url': url,
             }
 
             response = requests.post('https://snapinsta.tools/action.php', cookies=cookies, headers=headers, data=data)
