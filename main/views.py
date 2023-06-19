@@ -267,10 +267,9 @@ def instagram(request):
             response = requests.post('https://snapinsta.tools/action.php', cookies=cookies, headers=headers, data=data)
             downloadSoup = BeautifulSoup(response.text,"html.parser")
             downloadlink = downloadSoup.a["href"]
-        
-            data = dict()
-            data['link']=downloadlink
-            return render(request, 'main/instagram.html',{'data':data})
+            datas = dict()
+            datas['link']=downloadlink
+            return render(request, 'main/instagram.html',{'datas':datas})
                     
     except:
         return render(request, 'main/instagram.html', {'msg':"Error in downloading Instagram Video"})
