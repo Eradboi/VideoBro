@@ -224,56 +224,56 @@ def Explore(req):
     
 def help(sos):
     return render(sos, 'main/Help.html')
-def instagram(request):
+def instagram(request3):
     try:
-        if request.method == "POST":
-            url = request.POST['answer']
+        if "answer" in request3.POST:
+            url = request3.POST['answer']
             import requests
             from bs4 import BeautifulSoup
             cookies = {
-                'fpestid': 'hwTRueNcuzqLdOfh8FYz6WZsmvNd2M5lK-2alAU0tPiMjHvaVKJaE2yGupNqjOvvpgjRGQ',
-                '_cc_id': '99ac2fa8a3c1635a595ffab40634d37c',
-                'panoramaId_expiry': '1687281616073',
-                'panoramaId': 'b526ecc02c64df507b1bdbab14afa9fb927a2a9ed36302aeaa3db714815ee575',
-                'panoramaIdType': 'panoDevice',
-                '__gads': 'ID=f043369c8d5dd1a5-227acafeb3e100e6:T=1687195216:RT=1687195216:S=ALNI_MZtF6_UGtrQhXy8jXsw62m8lLcwYg',
-                '__gpi': 'UID=00000c51b198b486:T=1687195216:RT=1687195216:S=ALNI_MZWR36Lp5TXeggrNL4HbxiuTelW-w',
-                'PHPSESSID': 'a13ubond7vr1eud8ilmljv97br',
-                'sc_is_visitor_unique': 'rx12863674.1687195422.09BEBA6C63D64F60ECDBB2174A0520F9.1.1.1.1.1.1.1.1.1',
-            }
+                            'fpestid': 'hwTRueNcuzqLdOfh8FYz6WZsmvNd2M5lK-2alAU0tPiMjHvaVKJaE2yGupNqjOvvpgjRGQ',
+                            '_cc_id': '99ac2fa8a3c1635a595ffab40634d37c',
+                            'panoramaId_expiry': '1687281616073',
+                            'panoramaId': 'b526ecc02c64df507b1bdbab14afa9fb927a2a9ed36302aeaa3db714815ee575',
+                            'panoramaIdType': 'panoDevice',
+                            '__gads': 'ID=f043369c8d5dd1a5-227acafeb3e100e6:T=1687195216:RT=1687195216:S=ALNI_MZtF6_UGtrQhXy8jXsw62m8lLcwYg',
+                            '__gpi': 'UID=00000c51b198b486:T=1687195216:RT=1687195216:S=ALNI_MZWR36Lp5TXeggrNL4HbxiuTelW-w',
+                            'PHPSESSID': 'a13ubond7vr1eud8ilmljv97br',
+                            'sc_is_visitor_unique': 'rx12863674.1687195422.09BEBA6C63D64F60ECDBB2174A0520F9.1.1.1.1.1.1.1.1.1',
+                        }
 
             headers = {
-                'authority': 'snapinsta.tools',
-                'accept': 'text/html, */*; q=0.01',
-                'accept-language': 'en-US,en;q=0.9',
-                'content-type': 'application/x-www-form-urlencoded; charset=UTF-8',
-                # 'cookie': 'fpestid=hwTRueNcuzqLdOfh8FYz6WZsmvNd2M5lK-2alAU0tPiMjHvaVKJaE2yGupNqjOvvpgjRGQ; _cc_id=99ac2fa8a3c1635a595ffab40634d37c; panoramaId_expiry=1687281616073; panoramaId=b526ecc02c64df507b1bdbab14afa9fb927a2a9ed36302aeaa3db714815ee575; panoramaIdType=panoDevice; __gads=ID=f043369c8d5dd1a5-227acafeb3e100e6:T=1687195216:RT=1687195216:S=ALNI_MZtF6_UGtrQhXy8jXsw62m8lLcwYg; __gpi=UID=00000c51b198b486:T=1687195216:RT=1687195216:S=ALNI_MZWR36Lp5TXeggrNL4HbxiuTelW-w; PHPSESSID=a13ubond7vr1eud8ilmljv97br; sc_is_visitor_unique=rx12863674.1687195422.09BEBA6C63D64F60ECDBB2174A0520F9.1.1.1.1.1.1.1.1.1',
-                'origin': 'https://snapinsta.tools',
-                'referer': 'https://snapinsta.tools/',
-                'sec-ch-ua': '"Not.A/Brand";v="8", "Chromium";v="114", "Google Chrome";v="114"',
-                'sec-ch-ua-mobile': '?0',
-                'sec-ch-ua-platform': '"Windows"',
-                'sec-fetch-dest': 'empty',
-                'sec-fetch-mode': 'cors',
-                'sec-fetch-site': 'same-origin',
-                'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36',
-                'x-requested-with': 'XMLHttpRequest',
-            }
+                            'authority': 'snapinsta.tools',
+                            'accept': 'text/html, */*; q=0.01',
+                            'accept-language': 'en-US,en;q=0.9',
+                            'content-type': 'application/x-www-form-urlencoded; charset=UTF-8',
+                            # 'cookie': 'fpestid=hwTRueNcuzqLdOfh8FYz6WZsmvNd2M5lK-2alAU0tPiMjHvaVKJaE2yGupNqjOvvpgjRGQ; _cc_id=99ac2fa8a3c1635a595ffab40634d37c; panoramaId_expiry=1687281616073; panoramaId=b526ecc02c64df507b1bdbab14afa9fb927a2a9ed36302aeaa3db714815ee575; panoramaIdType=panoDevice; __gads=ID=f043369c8d5dd1a5-227acafeb3e100e6:T=1687195216:RT=1687195216:S=ALNI_MZtF6_UGtrQhXy8jXsw62m8lLcwYg; __gpi=UID=00000c51b198b486:T=1687195216:RT=1687195216:S=ALNI_MZWR36Lp5TXeggrNL4HbxiuTelW-w; PHPSESSID=a13ubond7vr1eud8ilmljv97br; sc_is_visitor_unique=rx12863674.1687195422.09BEBA6C63D64F60ECDBB2174A0520F9.1.1.1.1.1.1.1.1.1',
+                            'origin': 'https://snapinsta.tools',
+                            'referer': 'https://snapinsta.tools/',
+                            'sec-ch-ua': '"Not.A/Brand";v="8", "Chromium";v="114", "Google Chrome";v="114"',
+                            'sec-ch-ua-mobile': '?0',
+                            'sec-ch-ua-platform': '"Windows"',
+                            'sec-fetch-dest': 'empty',
+                            'sec-fetch-mode': 'cors',
+                            'sec-fetch-site': 'same-origin',
+                            'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36',
+                            'x-requested-with': 'XMLHttpRequest',
+                        }
 
             data = {
-                'url': url,
-            }
+                            'url': url,
+                        }
 
             response = requests.post('https://snapinsta.tools/action.php', cookies=cookies, headers=headers, data=data)
             downloadSoup = BeautifulSoup(response.text,"html.parser")
             downloadlink = downloadSoup.a["href"]
             datas = dict()
-            datas['link']=downloadlink
-            return render(request, 'main/instagram.html',{'datas':datas})
+            datas['link'] = downloadlink
+            return render(request3, 'main/instagram.html',{'datas':datas})
                     
     except:
-        return render(request, 'main/instagram.html', {'msg':"Error in downloading Instagram Video"})
-    return render(request, 'main/instagram.html')
+        return render(request3, 'main/instagram.html', {'msg':"Error in downloading Instagram Video"})
+    return render(request3, 'main/instagram.html')
 #*j,Qgdei2RR?PR7
 from django.shortcuts import render, redirect
 from .models import Review
