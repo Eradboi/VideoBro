@@ -15,7 +15,7 @@
             <p class="msg">{{ msg }}</p>
             <form class="form-groups" role="search" method="POST">
               {% csrf_token %}
-                <input class="youtput" name="answers" type="text" id="search"  placeholder="Paste Instagram Video link" />
+                <input class="youtput" name="answer2" type="text" id="search"  placeholder="Paste Instagram Video link" />
                 <br><br>
                 <div class="m-auto" id="wait" style="display: none; text-align: center;">
                   <span class="tiklink m-auto"><img src="https://media2.giphy.com/media/3oEjI6SIIHBdRxXI40/giphy.gif?cid=ecf05e47dpj6co644kpae7y5ry8n7yk6wmn7nc0d2i54vqqw&ep=v1_gifs_search&rid=giphy.gif&ct=g" width="30" height="30" alt="Loading..." />Download Started</span>
@@ -30,7 +30,7 @@
             <div class="tikLinkbody m-auto">
                 <span class="tiklink">Please click the link below to download your file:</span>
                 <br>
-                <a class="link-gangan" href="{{ datas.link }}">Link<i class="fa-solid fa-link"></i></a>
+                <a class="link-gangan" href="{{ datas.link2 }}">Link<i class="fa-solid fa-link"></i></a>
             </div>
             {% else %}
             <h1 class="msg-big">Download Instagram Videos</h1>

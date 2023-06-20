@@ -226,8 +226,8 @@ def help(sos):
     return render(sos, 'main/Help.html')
 def instagram(request3):
     try:
-        if "answer" in request3.POST:
-            url = request3.POST['answer']
+        if "answer2" in request3.POST:
+            urls = request3.POST['answer2']
             import requests
             from bs4 import BeautifulSoup
             cookies = {
@@ -261,18 +261,19 @@ def instagram(request3):
                         }
 
             data = {
-                            'url': url,
+                            'url': urls,
                         }
 
             response = requests.post('https://snapinsta.tools/action.php', cookies=cookies, headers=headers, data=data)
             downloadSoup = BeautifulSoup(response.text,"html.parser")
             downloadlink = downloadSoup.a["href"]
             datas = dict()
-            datas['link'] = downloadlink
+            datas['link2'] = downloadlink
             return render(request3, 'main/instagram.html',{'datas':datas})
                     
     except:
         return render(request3, 'main/instagram.html', {'msg':"Error in downloading Instagram Video"})
+    
     return render(request3, 'main/instagram.html')
 #*j,Qgdei2RR?PR7
 from django.shortcuts import render, redirect
