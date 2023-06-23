@@ -48,7 +48,7 @@ def audio(responses):
         for fname in os.listdir():
             if fname.endswith('.mp3'):
                 os.remove(fname)    
-        if responses.method == 'POST':
+        if  "links" in responses.POST:
             link = responses.POST['links']
             video = YouTube(link)
 
@@ -74,7 +74,7 @@ def video(request):
         for fname in os.listdir():
             if fname.endswith('.mp4'):
                 os.remove(fname)
-        if request.method == 'POST':
+        if "link" in request.POST:
             link = request.POST['link']
 
             
@@ -99,7 +99,7 @@ def playlist(request12):
     data = None
     # Remove the directory and all its contents
     try:
-        if request12.method == "POST": 
+        if "linkPlay" in request12.POST: 
             link = request12.POST['linkPlay']
             playlist = Playlist(link)   
             import re
