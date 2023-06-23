@@ -4,6 +4,7 @@ from .models import Review
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, HttpResponse, redirect
 from pytube import YouTube
+from django.http import FileResponse
 def youtube(url):
     try:        
         yt = YouTube(url)
@@ -43,10 +44,13 @@ def home1(response):
 
     return render(response, "main/home.html", {"data":data})
 
-def audio(responses):
-    try:    
-        if responses.method == 'POST':
-            link = responses.POST['links']
+def audio(responses1):
+    try:
+        for fname in os.listdir():
+            if fname.endswith('.mp3'):
+                os.remove(fname)
+        if responses1.method == 'POST':
+            link = responses1.POST['links']
             video = YouTube(link)
 
             stream = video.streams.filter(only_audio=True).first()
@@ -62,18 +66,18 @@ def audio(responses):
             
                 return  FileResponse(open(new_file,'rb'), as_attachment=True)
             else:
-                return render(responses, 'main/audio.html', {'msg':'The Audio was too big for VideoBro'})
+                return render(responses1, 'main/audio.html', {'msg':'The Audio was too big for VideoBro'})
     except:
-        return render(responses, 'main/audio.html', {'msg':'The Last Audio was not Downloaded'}) 
-    return render(responses, 'main/audio.html')
+        return render(responses1, 'main/audio.html', {'msg':'The Last Audio was not Downloaded'}) 
+    return render(responses1, 'main/audio.html')
 def video(request4):
     try:
+        for fname in os.listdir():
+            if fname.endswith('.mp4'):
+                os.remove(fname)
         if request4.method == 'POST':
             link = request4.POST['link']
-
             
-            
-            from django.http import FileResponse
             stream=YouTube(link).streams.get_highest_resolution()
             if stream.filesize < 1000000000:
                 
