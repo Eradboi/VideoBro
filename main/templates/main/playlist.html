@@ -17,7 +17,7 @@
             <h2>Check Playlist</h2>
             <form action="" method="GET" class="form">
                 {% csrf_token %}
-                <input clas="confirm" type="text" id="linkPlay" name="linkPlay" placeholder="Enter Youtube Playlist URL"><br><br>
+                <input class="confirm" type="text" id="linkPlay" name="linkPlay" placeholder="Enter Youtube Playlist URL"><br><br>
                 <div class="m-auto" id="wait" style="display: none; width: 100%; height: 100%; text-align: center;">
                     <span class="tiklink"><img src="https://media2.giphy.com/media/3oEjI6SIIHBdRxXI40/giphy.gif?cid=ecf05e47dpj6co644kpae7y5ry8n7yk6wmn7nc0d2i54vqqw&ep=v1_gifs_search&rid=giphy.gif&ct=g" width="45" height="45" alt="Loading..." />Download Started</span>
                   </div>
@@ -64,7 +64,7 @@
             <h2>Download Playlist</h2>
             <form action="" method="POST" class="form">
                 {% csrf_token %}
-                <input clas="confirm" type="text" id="linkPlay1" name="linkPlay1" placeholder="Confirm Youtube Playlist URL"><br><br>
+                <input class="confirm" type="text" id="linkPlay" name="linkPlay" placeholder="Confirm Youtube Playlist URL"><br><br>
                 
                 <button type="submit"  class="btnas" id="audbutton" onclick="setTimeout(myFunction, 1000)"><i class="fa-solid fa-download"></i> Download Playlist</button>
             </form>

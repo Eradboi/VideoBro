@@ -49,7 +49,7 @@ def Audio(responses):
             if fname.endswith('.mp3'):
                 os.remove(fname)    
         if  "links" in responses.POST:
-            link = responses.POST['links']
+            link = responses.POST.get('links')
             video = YouTube(link)
 
             stream = video.streams.filter(only_audio=True).first()
@@ -75,7 +75,7 @@ def Video(request):
             if fname.endswith('.mp4'):
                 os.remove(fname)
         if "link" in request.POST:
-            link = request.POST['link']
+            link = request.POST.get('link')
 
             
             
@@ -98,8 +98,8 @@ from django.http import FileResponse
 def Playlists(request12):
     # Remove the directory and all its contents
     try:
-        if "linkPlay1" in request12.POST: 
-            link = request12.POST['linkPlay1']
+        if "linkPlay" in request12.POST: 
+            link = request12.POST.get('linkPlay')
             playlist = Playlist(link)   
             import re
             
