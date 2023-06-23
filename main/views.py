@@ -96,10 +96,9 @@ def video(request):
 from pytube import Playlist, YouTube
 from django.http import FileResponse
 def playlist(request12):
-    data = None
     # Remove the directory and all its contents
     try:
-        if "linkPlay" in request12.POST: 
+        if "linkPlay1" in request12.POST: 
             link = request12.POST['linkPlay']
             playlist = Playlist(link)   
             import re
