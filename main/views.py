@@ -4,7 +4,6 @@ from .models import Review
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, HttpResponse, redirect
 from pytube import YouTube
-from django.http import FileResponse
 def youtube(url):
     try:        
         yt = YouTube(url)
@@ -44,13 +43,13 @@ def home1(response):
 
     return render(response, "main/home.html", {"data":data})
 
-def audio(responses1):
+def audio(responses):
     try:
         for fname in os.listdir():
             if fname.endswith('.mp3'):
-                os.remove(fname)
-        if responses1.method == 'POST':
-            link = responses1.POST['links']
+                os.remove(fname)    
+        if responses.method == 'POST':
+            link = responses.POST['links']
             video = YouTube(link)
 
             stream = video.streams.filter(only_audio=True).first()
@@ -66,18 +65,21 @@ def audio(responses1):
             
                 return  FileResponse(open(new_file,'rb'), as_attachment=True)
             else:
-                return render(responses1, 'main/audio.html', {'msg':'The Audio was too big for VideoBro'})
+                return render(responses, 'main/audio.html', {'msg':'The Audio was too big for VideoBro'})
     except:
-        return render(responses1, 'main/audio.html', {'msg':'The Last Audio was not Downloaded'}) 
-    return render(responses1, 'main/audio.html')
-def video(request4):
+        return render(responses, 'main/audio.html', {'msg':'The Last Audio was not Downloaded'}) 
+    return render(responses, 'main/audio.html')
+def video(request):
     try:
         for fname in os.listdir():
             if fname.endswith('.mp4'):
                 os.remove(fname)
-        if request4.method == 'POST':
-            link = request4.POST['link']
+        if request.method == 'POST':
+            link = request.POST['link']
+
             
+            
+            from django.http import FileResponse
             stream=YouTube(link).streams.get_highest_resolution()
             if stream.filesize < 1000000000:
                 
@@ -87,18 +89,18 @@ def video(request4):
                 os.rename(out_file, new_file)
                 return FileResponse(open(new_file,'rb'), as_attachment=True)
             else:
-                return render(request4, 'main/video.html', {'msg':'The Video was too big for VideoBro'}) 
+                return render(request, 'main/video.html', {'msg':'The Video was too big for VideoBro'}) 
     except:
-        return render(request4, 'main/video.html', {'msg':'The Last Video was not Downloaded'})  
-    return render(request4, 'main/video.html')
+        return render(request, 'main/video.html', {'msg':'The Last Video was not Downloaded'})  
+    return render(request, 'main/video.html')
 from pytube import Playlist, YouTube
 from django.http import FileResponse
-def playlist(request):
+def playlist(request12):
     data = None
     # Remove the directory and all its contents
     try:
-        if request.method == "POST": 
-            link = request.POST['linkPlay']
+        if request12.method == "POST": 
+            link = request12.POST['linkPlay']
             playlist = Playlist(link)   
             import re
             
@@ -131,9 +133,9 @@ def playlist(request):
                 response['Content-Disposition'] = 'attachment; filename="VideoBro-Download.zip"'
                 return response
             else:
-                return  render(request, 'main/playlist.html',{'msg': 'The Playlist is too long for VideoBro'})   
-        if "linkPlay" in request.GET:
-            url= request.GET.get('linkPlay')
+                return  render(request12, 'main/playlist.html',{'msg': 'The Playlist is too long for VideoBro'})   
+        if "linkPlay" in request12.GET:
+            url= request12.GET.get('linkPlay')
             from bs4 import BeautifulSoup
             import requests
             import re
@@ -164,10 +166,10 @@ def playlist(request):
             data["owner"]=urls[1]
             data["pic"]=urls[3]
             data["link"]=urls[4]
-            return  render(request, 'main/playlist.html',{"data":data,'video':video})
+            return  render(request12, 'main/playlist.html',{"data":data,'video':video})
     except:
-        return render(request, 'main/playlist.html',{"msg":"VideoBro encountered a network error"})
-    return  render(request, 'main/playlist.html')
+        return render(request12, 'main/playlist.html',{"msg":"VideoBro encountered a network error"})
+    return  render(request12, 'main/playlist.html')
 def Explore(req):
     try:
         if req.method == 'POST':
