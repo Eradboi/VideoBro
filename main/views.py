@@ -85,7 +85,7 @@ def video(request4):
             else:
                 return render(request4, 'main/video.html', {'msg':'The Video was too big for VideoBro'}) 
     except:
-        return render(request4 'main/video.html', {'msg':'The Last Video was not Downloaded'})  
+        return render(request4, 'main/video.html', {'msg':'The Last Video was not Downloaded'})  
     return render(request4, 'main/video.html')
 from pytube import Playlist, YouTube
 from django.http import FileResponse
