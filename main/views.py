@@ -99,7 +99,7 @@ def Playlists(request12):
     # Remove the directory and all its contents
     try:
         if "linkPlay1" in request12.POST: 
-            link = request12.POST['linkPlay']
+            link = request12.POST['linkPlay1']
             playlist = Playlist(link)   
             import re
             
