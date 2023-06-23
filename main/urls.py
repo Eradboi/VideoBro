@@ -2,9 +2,9 @@ from django.urls import path, include
 from . import views
 urlpatterns = [
     path("", views.home1, name='home'),
-    path("audio/", views.audio, name="audio"),
-    path('video/', views.video, name="video"),
-    path('playlist/', views.playlist, name='playlist'),
+    path("audio/", views.Audio, name="audio"),
+    path('video/', views.Video, name="video"),
+    path('playlist/', views.Playlists, name='playlist'),
     path('explore/', views.Explore, name='explore'),
     path('help/', views.help, name="help"),
     path('instagram/', views.instagram, name="instagram"),
