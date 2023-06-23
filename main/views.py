@@ -44,7 +44,10 @@ def home1(response):
     return render(response, "main/home.html", {"data":data})
 
 def Audio(responses):
-    try:  
+   
+        for fname in os.listdir():
+            if fname.endswith('.mp3'):
+                os.remove(fname)    
         if  "links" in responses.POST:
             link = responses.POST['links']
             video = YouTube(link)
@@ -63,13 +66,18 @@ def Audio(responses):
                 return  FileResponse(open(new_file,'rb'), as_attachment=True)
             else:
                 return render(responses, 'main/audio.html', {'msg':'The Audio was too big for VideoBro'})
-    except:
-        return render(responses, 'main/audio.html', {'msg':'The Last Audio was not Downloaded'}) 
-    return render(responses, 'main/audio.html')
+    
+        return render(responses, 'main/audio.html')
 def Video(request):
     try:
+        for fname in os.listdir():
+            if fname.endswith('.mp4'):
+                os.remove(fname)
         if "link" in request.POST:
             link = request.POST['link']
+
+            
+            
             from django.http import FileResponse
             stream=YouTube(link).streams.get_highest_resolution()
             if stream.filesize < 1000000000:
@@ -94,6 +102,7 @@ def Playlists(request12):
             playlist = Playlist(link)   
             import re
             
+                
             if len(playlist)<17:
                 # Get the URLs of the videos to download
                 import zipfile
@@ -102,7 +111,7 @@ def Playlists(request12):
 
                 playlist._video_regex = re.compile(r'\"url\":\"(/watch\?v=[\w-]*)')
                     # Download the videos and store them in the list
-                directorys = 'playlist/'
+                directorys = 'playlisto/'
                 os.makedirs(directorys, exist_ok=True)
                 for urls in playlist:
                     yt = YouTube(urls)
@@ -120,7 +129,6 @@ def Playlists(request12):
                     # Send the zip file as a response
                 response = FileResponse(open(zip_file_path, 'rb'), content_type='application/zip')
                 response['Content-Disposition'] = 'attachment; filename="VideoBro-Download.zip"'
-                downloaded_files.clear()
                 return response
             else:
                 return  render(request12, 'main/playlist.html',{'msg': 'The Playlist is too long for VideoBro'})   
