@@ -44,10 +44,7 @@ def home1(response):
     return render(response, "main/home.html", {"data":data})
 
 def audio(responses):
-    try:
-        for fname in os.listdir():
-            if fname.endswith('.mp3'):
-                os.remove(fname)    
+    try:    
         if responses.method == 'POST':
             link = responses.POST['links']
             video = YouTube(link)
@@ -69,13 +66,10 @@ def audio(responses):
     except:
         return render(responses, 'main/audio.html', {'msg':'The Last Audio was not Downloaded'}) 
     return render(responses, 'main/audio.html')
-def video(request):
+def video(request4):
     try:
-        for fname in os.listdir():
-            if fname.endswith('.mp4'):
-                os.remove(fname)
-        if request.method == 'POST':
-            link = request.POST['link']
+        if request4.method == 'POST':
+            link = request4.POST['link']
 
             
             
@@ -89,10 +83,10 @@ def video(request):
                 os.rename(out_file, new_file)
                 return FileResponse(open(new_file,'rb'), as_attachment=True)
             else:
-                return render(request, 'main/video.html', {'msg':'The Video was too big for VideoBro'}) 
+                return render(request4, 'main/video.html', {'msg':'The Video was too big for VideoBro'}) 
     except:
-        return render(request, 'main/video.html', {'msg':'The Last Video was not Downloaded'})  
-    return render(request, 'main/video.html')
+        return render(request4 'main/video.html', {'msg':'The Last Video was not Downloaded'})  
+    return render(request4, 'main/video.html')
 from pytube import Playlist, YouTube
 from django.http import FileResponse
 def playlist(request):
