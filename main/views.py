@@ -44,12 +44,9 @@ def home1(response):
     return render(response, "main/home.html", {"data":data})
 
 def Audio(responses):
-    try:
-        for fname in os.listdir():
-            if fname.endswith('.mp3'):
-                os.remove(fname)    
+    try:  
         if  "links" in responses.POST:
-            link = responses.POST.get('links')
+            link = responses.POST['links']
             video = YouTube(link)
 
             stream = video.streams.filter(only_audio=True).first()
@@ -71,14 +68,8 @@ def Audio(responses):
     return render(responses, 'main/audio.html')
 def Video(request):
     try:
-        for fname in os.listdir():
-            if fname.endswith('.mp4'):
-                os.remove(fname)
         if "link" in request.POST:
-            link = request.POST.get('link')
-
-            
-            
+            link = request.POST['link']
             from django.http import FileResponse
             stream=YouTube(link).streams.get_highest_resolution()
             if stream.filesize < 1000000000:
@@ -99,11 +90,10 @@ def Playlists(request12):
     # Remove the directory and all its contents
     try:
         if "linkPlay" in request12.POST: 
-            link = request12.POST.get('linkPlay')
+            link = request12.POST['linkPlay']
             playlist = Playlist(link)   
             import re
             
-                
             if len(playlist)<17:
                 # Get the URLs of the videos to download
                 import zipfile
@@ -114,8 +104,8 @@ def Playlists(request12):
                     # Download the videos and store them in the list
                 directorys = 'playlist/'
                 os.makedirs(directorys, exist_ok=True)
-                for url in playlist:
-                    yt = YouTube(url)
+                for urls in playlist:
+                    yt = YouTube(urls)
                     video = yt.streams.filter(type='video', progressive=True, file_extension='mp4').order_by('resolution').desc().\
                             first()
                     file_path = os.path.join(directorys, f'{video.title}-VideoBro-.mp4')  # Set the desired file path and format
@@ -130,6 +120,7 @@ def Playlists(request12):
                     # Send the zip file as a response
                 response = FileResponse(open(zip_file_path, 'rb'), content_type='application/zip')
                 response['Content-Disposition'] = 'attachment; filename="VideoBro-Download.zip"'
+                downloaded_files.clear()
                 return response
             else:
                 return  render(request12, 'main/playlist.html',{'msg': 'The Playlist is too long for VideoBro'})   
