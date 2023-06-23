@@ -45,17 +45,16 @@ def home1(response):
 
 def Audio(responses):
    
-        for fname in os.listdir():
-            if fname.endswith('.mp3'):
-                os.remove(fname)    
-        if  "links" in responses.POST:
+        if responses.method == 'POST' and 'links' in responses.POST:
             link = responses.POST['links']
             video = YouTube(link)
 
             stream = video.streams.filter(only_audio=True).first()
             if stream.filesize < 1000000000:
-                size= dict()
-                size["file"]= stream.filesize_mb
+                for fname in os.listdir():
+                    if fname.endswith('.mp3'):
+                        os.remove(fname)    
+                
                 out_file = stream.download()
                 # save the file
                 base, ext= os.path.splitext(out_file)
@@ -70,10 +69,7 @@ def Audio(responses):
         return render(responses, 'main/audio.html')
 def Video(request):
     try:
-        for fname in os.listdir():
-            if fname.endswith('.mp4'):
-                os.remove(fname)
-        if "link" in request.POST:
+        if "link" in request.POST and request.method == 'POST':
             link = request.POST['link']
 
             
@@ -82,6 +78,9 @@ def Video(request):
             stream=YouTube(link).streams.get_highest_resolution()
             if stream.filesize < 1000000000:
                 
+                for fname in os.listdir():
+                    if fname.endswith('.mp4'):
+                        os.remove(fname)
                 out_file = stream.download(skip_existing=True)
                 base, ext= os.path.splitext(out_file)
                 new_file = base + "-VideoBro-" + '.mp4'
@@ -96,7 +95,7 @@ from pytube import Playlist, YouTube
 from django.http import FileResponse
 def Playlists(request12):
     # Remove the directory and all its contents
-        if "linkPlay" in request12.POST: 
+        if "linkPlay" in request12.POST and request12.method =='POST': 
             link = request12.POST['linkPlay']
             playlist = Playlist(link)   
             import re
