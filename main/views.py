@@ -96,7 +96,6 @@ from pytube import Playlist, YouTube
 from django.http import FileResponse
 def Playlists(request12):
     # Remove the directory and all its contents
-    try:
         if "linkPlay" in request12.POST: 
             link = request12.POST['linkPlay']
             playlist = Playlist(link)   
@@ -111,7 +110,7 @@ def Playlists(request12):
 
                 playlist._video_regex = re.compile(r'\"url\":\"(/watch\?v=[\w-]*)')
                     # Download the videos and store them in the list
-                directorys = 'playlisto/'
+                directorys = 'playlist/'
                 os.makedirs(directorys, exist_ok=True)
                 for urls in playlist:
                     yt = YouTube(urls)
@@ -165,9 +164,8 @@ def Playlists(request12):
             data["pic"]=urls[3]
             data["link"]=urls[4]
             return  render(request12, 'main/playlist.html',{"data":data,'video':video})
-    except:
-        return render(request12, 'main/playlist.html',{"msg":"VideoBro encountered a network error"})
-    return  render(request12, 'main/playlist.html')
+    
+        return  render(request12, 'main/playlist.html')
 def Explore(req):
     try:
         if req.method == 'POST':
