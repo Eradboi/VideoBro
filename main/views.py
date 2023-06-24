@@ -44,17 +44,18 @@ def home1(response):
     return render(response, "main/home.html", {"data":data})
 
 def Audio(responses):
-   
-        if responses.method == 'POST' and 'links' in responses.POST:
+    try:
+        for fname in os.listdir():
+            if fname.endswith('.mp3'):
+                os.remove(fname)    
+        if  "links" in responses.POST:
             link = responses.POST['links']
             video = YouTube(link)
 
             stream = video.streams.filter(only_audio=True).first()
             if stream.filesize < 1000000000:
-                for fname in os.listdir():
-                    if fname.endswith('.mp3'):
-                        os.remove(fname)    
-                
+                size= dict()
+                size["file"]= stream.filesize_mb
                 out_file = stream.download()
                 # save the file
                 base, ext= os.path.splitext(out_file)
@@ -65,11 +66,15 @@ def Audio(responses):
                 return  FileResponse(open(new_file,'rb'), as_attachment=True)
             else:
                 return render(responses, 'main/audio.html', {'msg':'The Audio was too big for VideoBro'})
-    
-        return render(responses, 'main/audio.html')
+    except:
+        return render(responses, 'main/audio.html', {'msg':'The Last Audio was not Downloaded'}) 
+    return render(responses, 'main/audio.html')
 def Video(request):
     try:
-        if "link" in request.POST and request.method == 'POST':
+        for fname in os.listdir():
+            if fname.endswith('.mp4'):
+                os.remove(fname)
+        if "link" in request.POST:
             link = request.POST['link']
 
             
@@ -78,9 +83,6 @@ def Video(request):
             stream=YouTube(link).streams.get_highest_resolution()
             if stream.filesize < 1000000000:
                 
-                for fname in os.listdir():
-                    if fname.endswith('.mp4'):
-                        os.remove(fname)
                 out_file = stream.download(skip_existing=True)
                 base, ext= os.path.splitext(out_file)
                 new_file = base + "-VideoBro-" + '.mp4'
@@ -95,7 +97,8 @@ from pytube import Playlist, YouTube
 from django.http import FileResponse
 def Playlists(request12):
     # Remove the directory and all its contents
-        if "linkPlay" in request12.POST and request12.method =='POST': 
+    try:
+        if "linkPlay" in request12.POST: 
             link = request12.POST['linkPlay']
             playlist = Playlist(link)   
             import re
@@ -163,8 +166,9 @@ def Playlists(request12):
             data["pic"]=urls[3]
             data["link"]=urls[4]
             return  render(request12, 'main/playlist.html',{"data":data,'video':video})
-    
-        return  render(request12, 'main/playlist.html')
+    except:
+        return render(request12, 'main/playlist.html',{"msg":"VideoBro encountered a network error"})
+    return  render(request12, 'main/playlist.html')
 def Explore(req):
     try:
         if req.method == 'POST':

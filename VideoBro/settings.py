@@ -23,7 +23,7 @@ DATABASE_URL = "postgresql://postgres:FF6hFYdOfbrLyZD3ULOA@containers-us-west-11
 SECRET_KEY = 'django-insecure-+_g+3nv0jg+nj7=@ruq$qz5%eu(f5o(c#+-h3@r&h56f*g*l$a'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['videobro-production.up.railway.app']
 
